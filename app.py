@@ -36,7 +36,7 @@ def build_result_html(predicted: int, confidence: float, probs: list) -> str:
     bars_html = ""
     for i, (name, css_class, _) in enumerate(CLASS_META):
         pct = probs[i] * 100
-        active_style = "font-weight:700;color:#1e293b;" if i == predicted else ""
+        active_style = "font-weight:700;color:#f1f5f9;" if i == predicted else ""
         bars_html += f"""
         <div class="prob-row">
             <span class="prob-label" style="{active_style}">{name}</span>
@@ -147,43 +147,44 @@ CSS = """
 }
 #submit-btn:hover { opacity: 0.86 !important; }
 #result-panel {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #0f172a;
+    border: 1px solid #1e293b;
     border-radius: 14px;
     padding: 24px;
     min-height: 320px;
 }
 .result-card { border-radius: 12px; padding: 20px 22px; margin: 0; }
-.result-card.masked  { background: #f0fdf4; border-left: 5px solid #22c55e; }
-.result-card.no-mask { background: #fff7ed; border-left: 5px solid #f97316; }
-.result-label { font-size: 1.25rem; font-weight: 700; margin: 0 0 4px 0; line-height: 1.3; }
-.result-label.masked  { color: #15803d; }
-.result-label.no-mask { color: #c2410c; }
-.result-confidence { font-size: 0.88rem; color: #64748b; margin: 0 0 18px 0; }
+.result-card.masked  { background: #052e16; border-left: 5px solid #22c55e; }
+.result-card.no-mask { background: #1c0a00; border-left: 5px solid #f97316; }
+.result-label { font-size: 1.45rem; font-weight: 800; margin: 0 0 6px 0; line-height: 1.3; letter-spacing: -0.2px; }
+.result-label.masked  { color: #86efac; }
+.result-label.no-mask { color: #fdba74; }
+.result-confidence { font-size: 0.88rem; color: #94a3b8; margin: 0 0 18px 0; }
+.result-confidence strong { color: #e2e8f0; }
 .prob-section h4 {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    color: #94a3b8;
+    color: #475569;
     margin: 0 0 10px 0;
 }
 .prob-row { display:flex; align-items:center; margin-bottom:8px; gap:8px; }
-.prob-label { font-size:0.82rem; color:#475569; width:68px; flex-shrink:0; }
-.prob-bar-bg { flex:1; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
+.prob-label { font-size:0.82rem; color:#94a3b8; width:68px; flex-shrink:0; }
+.prob-bar-bg { flex:1; height:8px; background:#1e293b; border-radius:4px; overflow:hidden; }
 .prob-bar-fill { height:100%; border-radius:4px; }
 .prob-bar-fill.cloth    { background:#3b82f6; }
 .prob-bar-fill.n95      { background:#8b5cf6; }
 .prob-bar-fill.nomask   { background:#f97316; }
 .prob-bar-fill.surgical { background:#14b8a6; }
-.prob-pct { font-size:0.78rem; color:#94a3b8; width:38px; text-align:right; flex-shrink:0; }
+.prob-pct { font-size:0.78rem; color:#e2e8f0; width:38px; text-align:right; flex-shrink:0; font-weight:600; }
 .result-placeholder {
     display:flex; flex-direction:column; align-items:center;
     justify-content:center; min-height:240px;
-    color:#cbd5e1; text-align:center; gap:14px;
+    color:#334155; text-align:center; gap:14px;
 }
 .result-placeholder svg { width:52px; height:52px; opacity:0.4; }
-.result-placeholder p   { font-size:0.88rem; margin:0; line-height:1.55; }
+.result-placeholder p   { font-size:0.88rem; margin:0; line-height:1.55; color:#475569; }
 #app-footer {
     text-align:center;
     padding: 20px 0 6px;
@@ -231,7 +232,7 @@ with gr.Blocks(css=CSS, theme=gr.themes.Soft(), title="Face Mask Detector") as d
             )
 
         with gr.Column(scale=5):
-            gr.Markdown("### Result")
+            gr.Markdown("### Result", elem_classes=["result-heading"])
             result_output = gr.HTML(
                 value=PLACEHOLDER_HTML,
                 elem_id="result-panel",
