@@ -45,6 +45,7 @@ The final training dataset (~6,071 images) was manually curated from multiple pu
 |---|---|
 | [coffee124/facemaskn95](https://www.kaggle.com/datasets/coffee124/facemaskn95) | Kaggle |
 | [shiekhburhan/face-mask-dataset](https://www.kaggle.com/datasets/shiekhburhan/face-mask-dataset) | Kaggle |
+| [bahadoreizadkhah/face-mask-types-dataset](https://www.kaggle.com/datasets/bahadoreizadkhah/face-mask-types-dataset) | Kaggle |
 | Google Images | Web |
 | [Face Mask Wearing Image Dataset](https://data.mendeley.com/datasets/8pn3hg99t4/2) (v2, 2023) | Mendeley Data — tested, removed due to overfitting |
 
