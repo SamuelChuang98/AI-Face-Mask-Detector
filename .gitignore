@@ -1,9 +1,3 @@
 __pycache__/
 .gradio/
 *.pyc
-.idea/
-.claude/
-AgeBasedDataset/
-bias-gender/
-Mask - Black/
-Expectations-of-Originality*.pdf
