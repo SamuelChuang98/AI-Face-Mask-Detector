@@ -37,6 +37,32 @@ The original assignment achieved ~51% accuracy on a dataset of ~1,600 images. Th
 
 ---
 
+## Dataset
+
+The final training dataset (~6,071 images) was manually curated from multiple public sources. Images were selectively pulled from each — not used wholesale — to balance class sizes and reduce subject overlap.
+
+| Source | Platform |
+|---|---|
+| [coffee124/facemaskn95](https://www.kaggle.com/datasets/coffee124/facemaskn95) | Kaggle |
+| [shiekhburhan/face-mask-dataset](https://www.kaggle.com/datasets/shiekhburhan/face-mask-dataset) | Kaggle |
+| Google Images | Web |
+| [Face Mask Wearing Image Dataset](https://data.mendeley.com/datasets/8pn3hg99t4/2) (v2, 2023) | Mendeley Data — tested, removed due to overfitting |
+
+**Why Mendeley was removed:** The Mendeley dataset contains 24,916 images but many are of the same subjects photographed multiple times. When included, the model achieved 92.5% validation accuracy but failed to generalize — it was memorizing individuals, not mask types. Removing it and curating a smaller, more diverse set brought the valid loss down significantly.
+
+---
+
+## Limitations
+
+- **Low input resolution (64×64):** The model classifies images after downscaling to 64×64 pixels. Fine-grained visual details are lost, which is the primary reason N95 and Surgical masks are frequently confused — they look nearly identical at this resolution.
+- **Single-person images only:** The model is not a face detector. It classifies the entire image as a single prediction. Multi-person scenes or images where the face is small, occluded, or off-center will produce unreliable results.
+- **Mask type, not fit or coverage:** The model identifies the type of mask present, not whether it is worn correctly. A mask pulled below the nose or chin may still be classified as "masked."
+- **Dataset bias:** Training data was sourced from publicly available datasets that skew toward certain demographics, lighting conditions, and camera angles. Performance may degrade on images that differ significantly from the training distribution.
+- **Static classifier:** The model does not process video or real-time streams. Each image is classified independently with no temporal context.
+- **Limited dataset availability:** High-quality, diverse, labeled face mask datasets are scarce. Most publicly available datasets either suffer from subject overlap (same individuals appearing across many images, causing overfitting), class imbalance, or low variety in backgrounds, lighting, and demographics. This made it difficult to grow the dataset beyond ~6,000 images without reintroducing the overfitting problems seen with the larger Mendeley dataset.
+
+---
+
 ## Files
 
 | File | Description |
