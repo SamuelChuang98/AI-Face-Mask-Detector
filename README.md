@@ -73,10 +73,3 @@ python app.py
 python SignleImage.py
 ```
 
----
-
-## Dataset Sources
-
-- Original dataset: project team (2022)
-- Cloth/N95/Surgical: [Mendeley Face Mask Wearing Image Dataset](https://data.mendeley.com/datasets/8pn3hg99t4/2) (CC BY 4.0)
-- NoMask: [spandanpatnaik09](https://www.kaggle.com/datasets/spandanpatnaik09/face-mask-detectormask-not-mask-incorrect-mask) + [ashishjangra27](https://www.kaggle.com/datasets/ashishjangra27/face-mask-12k-images-dataset) (CC0)
