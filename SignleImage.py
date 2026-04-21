@@ -5,7 +5,8 @@ import PIL.Image as Image
 
 classes =["Cloth","N95","NoMask","Surgical"]
 
-model = torch.load('./models/model60.pth')
+model = torch.load('./models/modelAug6k.pth', weights_only=False)
+model.eval()
 
 image_transforms = transforms.Compose([
     transforms.Resize((64, 64)),
@@ -13,12 +14,14 @@ image_transforms = transforms.Compose([
     transforms.Normalize((0.5211, 0.4858, 0.4651), (0.2889, 0.2824, 0.2880))])
 
 def classify(model, image_transforms, image_path, classes):
-    model = model.eval()
-    image = Image.open(image_path)
+    image = Image.open(image_path).convert('RGB')
     image = image_transforms(image).float()
     image = image.unsqueeze(0)
 
-    output = model(image)
+    with torch.no_grad():
+        output = model(image)
+
+    print("Raw logits:", output)
     _, predicted = torch.max(output.data, 1)
 
     print("In the Image given the mask worn is a",classes[predicted.item()],"mask.")
